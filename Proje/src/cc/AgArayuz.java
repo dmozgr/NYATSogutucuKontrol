@@ -8,9 +8,11 @@ public class AgArayuz implements IAgArayuz,Observer{
     private IEkran ekran;
     private IKisi kullanici;
     private IVeriTabaniSurucusu veriTabaniSurucusu;
+    private IMerkeziIslemPlatform CPU;
     public AgArayuz() {
         this.ekran = new Ekran();
         this.veriTabaniSurucusu=VeriTabaniSurucuFactory.getVeritabani("postresql");
+        this.CPU=new MerkeziIslemPlatform(ekran,this);
     }
 
     public void Basla()
@@ -51,7 +53,6 @@ public class AgArayuz implements IAgArayuz,Observer{
 
     @Override
     public void IslemSecimi() {
-        IMerkeziIslemPlatform CPU = new MerkeziIslemPlatform(ekran,this);
         Scanner scanner = new Scanner(in);
         Secenekler secenekler = new Secenekler(ekran);
         String devam;
